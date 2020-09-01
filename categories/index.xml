@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Mainroad</title>
+    <title>Categories on 나의 블로그</title>
     <link>/categories/</link>
-    <description>Recent content in Categories on Mainroad</description>
+    <description>Recent content in Categories on 나의 블로그</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
+    <lastBuildDate>Tue, 01 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>첫 블로그</title>
+      <link>/categories/%EC%B2%AB-%EB%B8%94%EB%A1%9C%EA%B7%B8/</link>
+      <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/%EC%B2%AB-%EB%B8%94%EB%A1%9C%EA%B7%B8/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
