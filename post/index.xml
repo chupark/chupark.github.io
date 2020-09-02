@@ -6,7 +6,7 @@
     <description>Recent content in Posts on 나의 블로그</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 02 Sep 2020 15:49:46 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2020 15:50:46 +0900</lastBuildDate>
     
 	<atom:link href="https://chiwoo.bmdevs.com/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Kubernetes Replicaset</title>
       <link>https://chiwoo.bmdevs.com/post/kubernetes-replicaset/</link>
-      <pubDate>Wed, 02 Sep 2020 15:49:46 +0900</pubDate>
+      <pubDate>Wed, 02 Sep 2020 15:50:46 +0900</pubDate>
       
       <guid>https://chiwoo.bmdevs.com/post/kubernetes-replicaset/</guid>
       <description>Replicaset, 레플리카셋 레플리카셋은 포드의 복제본을 일정한 수의 복제본으로 유지하려고 노력하는 Kubernetes 리소스다. 최초에는 레플리케이션 컨트롤러가 포드를 복제하고 노드가 실패했을 때 재스키줄링하는 유일한 Kubernetes 구성 요소였다. 나중에 레플리케이션 컨트롤러보다 더 진보된 레플리카셋이라는 리소스가 도입됐다.

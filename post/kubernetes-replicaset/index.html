@@ -12,14 +12,14 @@
 기본  레플리카셋은 레플리케이션컨트롤러와 똑같이 동작하지만 다양한 포드 셀렉터를 갖는다. 레플리케이션 컨트롤러는 단일 셀렉터만 사용해 포드를 매칭시켰지만, 레플리카셋은 특정 라벨이 있거나 없거나와 여러개의 라벨을 일치시킬 수 있다. 또한 env=*과 같이, 특정 라벨 키를 가진 모든 포드를 매칭시킬 수도 있다." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://chiwoo.bmdevs.com/post/kubernetes-replicaset/" />
-<meta property="article:published_time" content="2020-09-02T15:49:46+09:00" />
-<meta property="article:modified_time" content="2020-09-02T15:49:46+09:00" />
+<meta property="article:published_time" content="2020-09-02T15:50:46+09:00" />
+<meta property="article:modified_time" content="2020-09-02T15:50:46+09:00" />
 
 		<meta itemprop="name" content="Kubernetes Replicaset">
 <meta itemprop="description" content="Replicaset, 레플리카셋 레플리카셋은 포드의 복제본을 일정한 수의 복제본으로 유지하려고 노력하는 Kubernetes 리소스다. 최초에는 레플리케이션 컨트롤러가 포드를 복제하고 노드가 실패했을 때 재스키줄링하는 유일한 Kubernetes 구성 요소였다. 나중에 레플리케이션 컨트롤러보다 더 진보된 레플리카셋이라는 리소스가 도입됐다.
 기본  레플리카셋은 레플리케이션컨트롤러와 똑같이 동작하지만 다양한 포드 셀렉터를 갖는다. 레플리케이션 컨트롤러는 단일 셀렉터만 사용해 포드를 매칭시켰지만, 레플리카셋은 특정 라벨이 있거나 없거나와 여러개의 라벨을 일치시킬 수 있다. 또한 env=*과 같이, 특정 라벨 키를 가진 모든 포드를 매칭시킬 수도 있다.">
-<meta itemprop="datePublished" content="2020-09-02T15:49:46+09:00" />
-<meta itemprop="dateModified" content="2020-09-02T15:49:46+09:00" />
+<meta itemprop="datePublished" content="2020-09-02T15:50:46+09:00" />
+<meta itemprop="dateModified" content="2020-09-02T15:50:46+09:00" />
 <meta itemprop="wordCount" content="303">
 
 
@@ -82,7 +82,7 @@ if (!doNotTrack) {
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">chupark</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-02T15:49:46&#43;09:00">2020-09-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes/" rel="category">kubernetes</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-02T15:50:46&#43;09:00">2020-09-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes/" rel="category">kubernetes</a>
 	</span>
 </div></div>
 		</header>
