@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 나의 블로그</title>
-    <link>https://chiwoo.bmdevs.com/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on 나의 블로그</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
     <lastBuildDate>Tue, 01 Sep 2020 15:56:21 +0900</lastBuildDate>
     
-	<atom:link href="https://chiwoo.bmdevs.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>kubernetes</title>
-      <link>https://chiwoo.bmdevs.com/categories/kubernetes/</link>
+      <link>/categories/kubernetes/</link>
       <pubDate>Tue, 01 Sep 2020 15:56:21 +0900</pubDate>
       
-      <guid>https://chiwoo.bmdevs.com/categories/kubernetes/</guid>
+      <guid>/categories/kubernetes/</guid>
       <description></description>
     </item>
     
