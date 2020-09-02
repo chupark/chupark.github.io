@@ -12,7 +12,7 @@
 <meta property="og:description" content="Chi Woo Park&#39;s Personal blog about everything" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
-<meta property="og:updated_time" content="2020-09-01T00:00:00+00:00" />
+<meta property="og:updated_time" content="2020-09-01T15:56:21+09:00" />
 
 		<meta itemprop="name" content="나의 블로그">
 <meta itemprop="description" content="Chi Woo Park&#39;s Personal blog about everything">
@@ -31,6 +31,17 @@
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-177056541-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -57,6 +68,42 @@
 	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
+			<a href="/post/kubernetes-pod1/" rel="bookmark">
+			Kubernetes Pod
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">내 블로그</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-01T15:56:21&#43;09:00">2020-09-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes/" rel="category">kubernetes</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Pod Pod는 Kubernetes 애플리케이션의 배포 단위이다. Pod 안에는 여러 컨테이너를 배치할 수 있으며 같은 Pod는 같은 네임스페이스를 공유하기 때문에 hostname, ip등을 공유하게 된다.
+기본  내용
+라이브니스 프로브  포드가 노드에 스케줄되는 대로, 해당 노드의 Kubelet은 컨테이너를 실행하고 포드가 존재하는 동안 계속 실행시키도록 노력한다. 컨테이너의 주 프로세스에 크래시가 발생하면 Kubelet이 컨테이너를 다시 시작한다. 애플리케이션 버그가 발생하여 컨테이너 크래시가 발생해도 Kubelet은 컨테이너를 자동으로 다시 시작하므로 쿠버네티스에서 실행 중인 애플리케이션을 자동으로 복구할 수 있다.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/post/hello2/" rel="bookmark">
+			Hello2
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">내 블로그</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-01T15:55:23&#43;09:00">2020-09-01</time></div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		asdf
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
 			<a href="/post/hello/" rel="bookmark">
 			Basic HTML Elements
 			</a>
@@ -65,12 +112,13 @@
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">내 블로그</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-01T00:00:00Z">2020-09-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%EC%B2%AB-%EB%B8%94%EB%A1%9C%EA%B7%B8/" rel="category">첫 블로그</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-01T00:00:00Z">2020-09-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%EB%B8%94%EB%A1%9C%EA%B7%B8/" rel="category">블로그</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		Hello World Hello world Hello world is a language
+asdf
 	</div>
 </article>
 </main>
@@ -90,6 +138,8 @@
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes-pod1/">Kubernetes Pod</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/hello2/">Hello2</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/hello/">Basic HTML Elements</a></li>
 		</ul>
 	</div>
@@ -99,7 +149,10 @@
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/%EC%B2%AB-%EB%B8%94%EB%A1%9C%EA%B7%B8/">첫 블로그</a>
+				<a class="widget__link" href="/categories/kubernetes/">kubernetes</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%EB%B8%94%EB%A1%9C%EA%B7%B8/">블로그</a>
 			</li>
 		</ul>
 	</div>
@@ -107,6 +160,7 @@
 <div class="widget-taglist widget">
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/kubernetes/" title="kubernetes">kubernetes</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/" title="블로그">블로그</a>
 	</div>
 </div>
