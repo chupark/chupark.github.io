@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Kubernetes Replicaset - 나의 블로그</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Kubernetes Replicaset" />
+<meta property="og:description" content="Replicaset, 레플리카셋 레플리카셋은 포드의 복제본을 일정한 수의 복제본으로 유지하려고 노력하는 Kubernetes 리소스다. 최초에는 레플리케이션 컨트롤러가 포드를 복제하고 노드가 실패했을 때 재스키줄링하는 유일한 Kubernetes 구성 요소였다. 나중에 레플리케이션 컨트롤러보다 더 진보된 레플리카셋이라는 리소스가 도입됐다.
+기본  레플리카셋은 레플리케이션컨트롤러와 똑같이 동작하지만 다양한 포드 셀렉터를 갖는다. 레플리케이션 컨트롤러는 단일 셀렉터만 사용해 포드를 매칭시켰지만, 레플리카셋은 특정 라벨이 있거나 없거나와 여러개의 라벨을 일치시킬 수 있다. 또한 env=*과 같이, 특정 라벨 키를 가진 모든 포드를 매칭시킬 수도 있다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chiwoo.bmdevs.com/post/kubernetes-replicaset/" />
+<meta property="article:published_time" content="2020-09-02T15:49:46+09:00" />
+<meta property="article:modified_time" content="2020-09-02T15:49:46+09:00" />
+
+		<meta itemprop="name" content="Kubernetes Replicaset">
+<meta itemprop="description" content="Replicaset, 레플리카셋 레플리카셋은 포드의 복제본을 일정한 수의 복제본으로 유지하려고 노력하는 Kubernetes 리소스다. 최초에는 레플리케이션 컨트롤러가 포드를 복제하고 노드가 실패했을 때 재스키줄링하는 유일한 Kubernetes 구성 요소였다. 나중에 레플리케이션 컨트롤러보다 더 진보된 레플리카셋이라는 리소스가 도입됐다.
+기본  레플리카셋은 레플리케이션컨트롤러와 똑같이 동작하지만 다양한 포드 셀렉터를 갖는다. 레플리케이션 컨트롤러는 단일 셀렉터만 사용해 포드를 매칭시켰지만, 레플리카셋은 특정 라벨이 있거나 없거나와 여러개의 라벨을 일치시킬 수 있다. 또한 env=*과 같이, 특정 라벨 키를 가진 모든 포드를 매칭시킬 수도 있다.">
+<meta itemprop="datePublished" content="2020-09-02T15:49:46+09:00" />
+<meta itemprop="dateModified" content="2020-09-02T15:49:46+09:00" />
+<meta itemprop="wordCount" content="303">
+
+
+
+<meta itemprop="keywords" content="kubernetes," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Kubernetes Replicaset"/>
+<meta name="twitter:description" content="Replicaset, 레플리카셋 레플리카셋은 포드의 복제본을 일정한 수의 복제본으로 유지하려고 노력하는 Kubernetes 리소스다. 최초에는 레플리케이션 컨트롤러가 포드를 복제하고 노드가 실패했을 때 재스키줄링하는 유일한 Kubernetes 구성 요소였다. 나중에 레플리케이션 컨트롤러보다 더 진보된 레플리카셋이라는 리소스가 도입됐다.
+기본  레플리카셋은 레플리케이션컨트롤러와 똑같이 동작하지만 다양한 포드 셀렉터를 갖는다. 레플리케이션 컨트롤러는 단일 셀렉터만 사용해 포드를 매칭시켰지만, 레플리카셋은 특정 라벨이 있거나 없거나와 여러개의 라벨을 일치시킬 수 있다. 또한 env=*과 같이, 특정 라벨 키를 가진 모든 포드를 매칭시킬 수도 있다."/>
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-177056541-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="내 블로그" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/placeholder.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">내 블로그</div>
+					<div class="logo__tagline">어서 오셔요</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Kubernetes Replicaset</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">chupark</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-02T15:49:46&#43;09:00">2020-09-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes/" rel="category">kubernetes</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#기본">기본</a>
+      <ul>
+        <li><a href="#레플리카셋-정의">레플리카셋 정의</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h1 id="replicaset-레플리카셋">Replicaset, 레플리카셋</h1>
+<p>레플리카셋은 포드의 복제본을 일정한 수의 복제본으로 유지하려고 노력하는 Kubernetes 리소스다. 최초에는 레플리케이션 컨트롤러가 포드를 복제하고 노드가 실패했을 때 재스키줄링하는 유일한 Kubernetes 구성 요소였다. 나중에 레플리케이션 컨트롤러보다 더 진보된 레플리카셋이라는 리소스가 도입됐다.<br>
+　
+<!-- raw HTML omitted --></p>
+<h2 id="기본">기본</h2>
+<hr>
+<p>레플리카셋은 레플리케이션컨트롤러와 똑같이 동작하지만 다양한 포드 셀렉터를 갖는다. 레플리케이션 컨트롤러는 단일 셀렉터만 사용해 포드를 매칭시켰지만, 레플리카셋은 특정 라벨이 있거나 없거나와 여러개의 라벨을 일치시킬 수 있다. 또한 env=*과 같이, 특정 라벨 키를 가진 모든 포드를 매칭시킬 수도 있다.<br>
+　
+<!-- raw HTML omitted --></p>
+<h3 id="레플리카셋-정의">레플리카셋 정의</h3>
+<hr>
+<p>레플리카셋이 레플리케이션 컨트롤러와 다른점은 셀렉터다. 포드는 selector 속성 바로 아래에 있지 않고, selector.matchLabels 아래에 지정한다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: ReplicaSet
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: kubia
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: kubia
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: kubia
+        <span style="color:#66d9ef">image</span>: luksa/kubia
+</code></pre></div><p>　
+<!-- raw HTML omitted --></p>
+<p>레플리카셋은 레플리케이션컨트롤러와 다르지 않다. 셀렉터와 일치하는 세 개의 복제본이 있음을 보여준다.
+<figure>
+    <img src="/img/replicaset/1.png"/> 
+</figure>
+
+　
+<!-- raw HTML omitted --></p>
+<h4 id="레플리카셋의-다양한-라벨-셀렉터-사용">레플리카셋의 다양한 라벨 셀렉터 사용</h4>
+<hr>
+<p>레플리카셋의 주요 개선점은 표현식이 뛰어난 라벨 셀렉터다. 아래 처럼 matchExpression 속성을 사용하도록 selector를 작성할 수 있다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1beta2
+<span style="color:#66d9ef">kind</span>: ReplicaSet
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchExpressions</span>:
+      - <span style="color:#66d9ef">key</span>: app
+        <span style="color:#66d9ef">operator</span>: In
+        <span style="color:#66d9ef">values</span>:
+         - kubia
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: kubia
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: kubia
+        <span style="color:#66d9ef">image</span>: luksa/kubia
+</code></pre></div><p>　<br>
+레플리카셋은 포드를 항상 정의된 복제본 수 만큼 유지하도록 노력한다. 라벨이 일치하는 포드가 적으면 새로운 복제본을 생성하고 더 많으면 포드를 삭제하여 항상 정의된 수를 유지한다.
+<figure>
+    <img src="/img/replicaset/2.png"/> 
+</figure>
+</p>
+<blockquote>
+<p><strong><em>NOTE :</em></strong> 사진을 살펴보면 포드는 이미 3개가 만들어졌지만 1개만 준비된 상태임을알 수 있다.</p>
+</blockquote>
+<p>레플리카셋은 아래와 같은 연산자를 가진다.</p>
+<ul>
+<li><strong>IN</strong> : 라벨의 값이 지정된 값 중 하나와 일치해야 한다.</li>
+<li><strong>NotIn</strong> : 라벨의 값이 지정된 값과 일치해서는 안 된다.</li>
+<li><strong>Exists</strong> : 포드에는 지정된 키가 있는 라벨이 포함돼야 한다 (값은 중요하지 않음). 이 연산자를 사용할 때 값 필드를 지정하면 안 된다.</li>
+<li><strong>DoesNotExist</strong> : 포드에는 지정된 키가 있는 라벨을 포함하면 안 된다. values 속성을 지정하면 안 된다. 여러 표현식을 지정하면 셀렉터가 포드와 일치하도록 모든 표현식이 true로 평가돼야 한다.</li>
+</ul>
+<blockquote>
+<p><strong><em>NOTE :</em></strong> matchLabels와 matchExpressions을 모드 지정하면 셀렉터와 일치호도록 모든 라벨이 일치해야 하고 모든 표현식이 true로 평가돼야 한다.</p>
+</blockquote>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/kubernetes/" rel="tag">kubernetes</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="chupark avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About chupark</span>
+	</div>
+	<div class="authorbox__description">
+		안녕하세요
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/post/kubernetes-pod1/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Kubernetes Pod</p>
+		</a>
+	</div>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://chiwoo-bmdevs-com.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Chi Woo Park.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
