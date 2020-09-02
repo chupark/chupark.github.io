@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 나의 블로그</title>
-    <link>/post/</link>
+    <link>https://chiwoo.bmdevs.com/post/</link>
     <description>Recent content in Posts on 나의 블로그</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
     <lastBuildDate>Tue, 01 Sep 2020 15:56:21 +0900</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chiwoo.bmdevs.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Kubernetes Pod</title>
-      <link>/post/kubernetes-pod1/</link>
+      <link>https://chiwoo.bmdevs.com/post/kubernetes-pod1/</link>
       <pubDate>Tue, 01 Sep 2020 15:56:21 +0900</pubDate>
       
-      <guid>/post/kubernetes-pod1/</guid>
+      <guid>https://chiwoo.bmdevs.com/post/kubernetes-pod1/</guid>
       <description>Pod Pod는 Kubernetes 애플리케이션의 배포 단위이다. Pod 안에는 여러 컨테이너를 배치할 수 있으며 같은 Pod는 같은 네임스페이스를 공유하기 때문에 hostname, ip등을 공유하게 된다.
 기본  내용
 라이브니스 프로브  포드가 노드에 스케줄되는 대로, 해당 노드의 Kubelet은 컨테이너를 실행하고 포드가 존재하는 동안 계속 실행시키도록 노력한다. 컨테이너의 주 프로세스에 크래시가 발생하면 Kubelet이 컨테이너를 다시 시작한다. 애플리케이션 버그가 발생하여 컨테이너 크래시가 발생해도 Kubelet은 컨테이너를 자동으로 다시 시작하므로 쿠버네티스에서 실행 중인 애플리케이션을 자동으로 복구할 수 있다.</description>
