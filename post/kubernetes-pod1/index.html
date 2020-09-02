@@ -22,7 +22,7 @@
 라이브니스 프로브  포드가 노드에 스케줄되는 대로, 해당 노드의 Kubelet은 컨테이너를 실행하고 포드가 존재하는 동안 계속 실행시키도록 노력한다. 컨테이너의 주 프로세스에 크래시가 발생하면 Kubelet이 컨테이너를 다시 시작한다. 애플리케이션 버그가 발생하여 컨테이너 크래시가 발생해도 Kubelet은 컨테이너를 자동으로 다시 시작하므로 쿠버네티스에서 실행 중인 애플리케이션을 자동으로 복구할 수 있다.">
 <meta itemprop="datePublished" content="2020-09-01T15:56:21+09:00" />
 <meta itemprop="dateModified" content="2020-09-01T15:56:21+09:00" />
-<meta itemprop="wordCount" content="180">
+<meta itemprop="wordCount" content="213">
 
 
 
@@ -119,11 +119,32 @@ if (!doNotTrack) {
 하지만 때론, 애플리케이션이 프로세스의 크래시없이 작동이 중단되는 경우도 있다. 예를 들어, 메모리 누수가 있는 자바 애플리케이션은 OOMErrors를 던지기 시작하지만 JVM프로세스는 계속 실행된다. 이러한 상황에선 애플리케이션 재시작을 위해 특별한 검사를 실행해야한다.</p>
 <!-- raw HTML omitted -->
 <p>쿠버네티스는 세 가지 메커니즘 중 하나를 사용하여 컨테이너를 검색한다.</p>
-<ul>
+<ol>
 <li><strong>HTTP GET</strong> 프로브는 지정한 IP, 포트, 경로에 HTTP GET 요청을 수행한다. 프로브가 응답을 수신하고 응답 코드가 오류를 나타내지 않을 경우(HTTP status : 2XX, 3XX) 프로브는 성공한 것으로 간주한다. 프로브가 실패하면 컨테이너를 재시작한다.</li>
 <li><strong>TCP</strong> 소켓 프로브가 컨테이너의 지정된 포트에 TCP 연결을 시도하고, 성공적으로 연결되면 프로브가 성공한 것이고 그렇지 않으면 컨테이너가 재시작된다.</li>
-<li><strong>Exec</strong> 프로브는 컨테이너 내부에 임의의 명령을 실행하고 명령의 종료 상태 코드를 확인한다. 상태코드가 0이면 검사가 성공적이다. 다른 모든 코드는 오류로 간주된다.</li>
-</ul>
+<li><strong>Exec</strong> 프로브는 컨테이너 내부에 임의의 명령을 실행하고 명령의 종료 상태 코드를 확인한다. 상태코드가 0이면 검사가 성공적이다. 다른 모든 코드는 오류로 간주된다.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+    <span style="color:#66d9ef">name</span>: pod
+<span style="color:#66d9ef">spec</span>:
+    <span style="color:#66d9ef">containers</span>:
+    - <span style="color:#66d9ef">image</span>: my-image
+    <span style="color:#66d9ef">name</span>: my-pod
+    <span style="color:#66d9ef">livenessProbe</span>:
+        <span style="color:#66d9ef">httpGet</span>:
+        <span style="color:#66d9ef">path</span>: /
+        <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
+</code></pre></div><blockquote>
+<p><strong><em>NOTE:</em></strong>  컨테이너가 강제 종료되면 완전히 새로운 컨테이너가 생성된다. 기존 컨테이너가 재시작되는 것이 아니다.</p>
+</blockquote>
+</li>
+</ol>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/2xkNJL4gJ9E" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 
 		</div>
 		<footer class="post__footer">
