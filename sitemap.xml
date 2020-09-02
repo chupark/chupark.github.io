@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chiwoo.bmdevs.com/post/asdf2/</loc>
+    <lastmod>2020-09-02T11:16:28+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chiwoo.bmdevs.com/post/</loc>
+    <lastmod>2020-09-02T11:16:28+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chiwoo.bmdevs.com/</loc>
+    <lastmod>2020-09-02T11:16:28+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chiwoo.bmdevs.com/categories/</loc>
     <lastmod>2020-09-01T15:56:21+09:00</lastmod>
   </url>
@@ -23,17 +38,7 @@
   </url>
   
   <url>
-    <loc>https://chiwoo.bmdevs.com/post/</loc>
-    <lastmod>2020-09-01T15:56:21+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://chiwoo.bmdevs.com/tags/</loc>
-    <lastmod>2020-09-01T15:56:21+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chiwoo.bmdevs.com/</loc>
     <lastmod>2020-09-01T15:56:21+09:00</lastmod>
   </url>
   
