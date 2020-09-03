@@ -20,7 +20,7 @@
 기본  데몬셋에 의해 만들어진 포드는 이미 대상 노드가 지정돼 욌고 Kubernetes 스케줄러를 패스한다. 데몬셋은 레플리카의 개념이 없고 노드가 있는 수만큼 포드를 생성하고 노드 각각에 포드를 하나씩 배포한다. 노드가 다운되면 데몬셋은 다운된 노드의 포드를 다른 노드로 스케줄하지 않는다.">
 <meta itemprop="datePublished" content="2020-09-03T11:06:22+09:00" />
 <meta itemprop="dateModified" content="2020-09-03T11:06:22+09:00" />
-<meta itemprop="wordCount" content="128">
+<meta itemprop="wordCount" content="187">
 
 
 
@@ -118,7 +118,7 @@ if (!doNotTrack) {
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">chupark</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-03T11:06:22&#43;09:00">2020-09-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes/" rel="category">kubernetes</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-03T11:06:22&#43;09:00">2020-09-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes-pod/" rel="category">kubernetes pod</a>
 	</span>
 </div></div>
 		</header>
@@ -151,9 +151,29 @@ if (!doNotTrack) {
 　</p>
 <h3 id="데몬셋-정의">데몬셋 정의</h3>
 <hr>
-<p>레플리카셋이 레플리케이션 컨트롤러와 다른점은 셀렉터다. 포드는 selector 속성 바로 아래에 있지 않고, selector.matchLabels 아래에 지정한다.</p>
+<p>아래 예시처럼 SSD를 사용하는 노드가 있다고 가정하고 5초마다 &ldquo;SSD OK&quot;를 표준 출력에 보여주는 ssd-monitor 프로세스를 실행하는 데몬셋을 생성해본다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: DaemonSet
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: ssd-monitor
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: ssd-monitor
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: ssd-monitor
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">nodeSelector</span>:
+        <span style="color:#66d9ef">ssd</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: main
+        <span style="color:#66d9ef">image</span>: luksa/ssd-monitor
+</code></pre></div><!-- raw HTML omitted -->
+<p>그 결과 아래 그림처럼 SSD=true 라벨을 가진 노드에 데몬셋에 의해 만들어진 포드가 배포됐음을 확인할 수 있다. 만약 노드의 라벨이 SSD=false로 변경되거나 라벨이 삭제되면 해당 노드에 있는 데몬셋 포드는 삭제된다.</p>
 <figure>
-    <img src="/img/daemonset/1.png"/> 
+    <img src="/img/daemonset/2.png"/> 
 </figure>
 
 
@@ -180,7 +200,7 @@ if (!doNotTrack) {
 		<span class="authorbox__name">About chupark</span>
 	</div>
 	<div class="authorbox__description">
-		안녕하세요
+		경제적 자유를 위하여&hellip;
 	</div>
 </div>
 
@@ -189,6 +209,12 @@ if (!doNotTrack) {
 		<a class="pager__link" href="/post/kubernetes-replicaset/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
 			<p class="pager__title">Kubernetes Replicaset</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/post/kubernetes-job/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Kubernetes Job</p>
 		</a>
 	</div>
 </nav>

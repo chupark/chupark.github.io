@@ -6,7 +6,7 @@
     <description>Recent content in Tags on 나의 블로그</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 02 Sep 2020 15:50:46 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 03 Sep 2020 14:53:38 +0900</lastBuildDate>
     
 	<atom:link href="https://chiwoo.bmdevs.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>kubernetes</title>
       <link>https://chiwoo.bmdevs.com/tags/kubernetes/</link>
-      <pubDate>Wed, 02 Sep 2020 15:50:46 +0900</pubDate>
+      <pubDate>Thu, 03 Sep 2020 14:53:38 +0900</pubDate>
       
       <guid>https://chiwoo.bmdevs.com/tags/kubernetes/</guid>
       <description></description>
