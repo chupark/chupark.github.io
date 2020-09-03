@@ -67,7 +67,43 @@ if (!doNotTrack) {
 				</div>
 		</a>
 	</div>
-		<div class="divider"></div>
+		<style>
+.menu__item {
+	text-align: center
+}
+
+.menu__link {
+	width: 120px
+}
+</style>
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				<span class="menu__text" style="text-align: center">Home</span>
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/about/about">
+				<span class="menu__text" style="text-align: center">About</span>
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				<span class="menu__text" style="text-align: center">Categories</span>
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				<span class="menu__text">Tags</span>
+			</a>
+		</li>
+	</ul>
+</nav>
+
 
 	</div>
 </header>
@@ -214,6 +250,12 @@ if (!doNotTrack) {
 		<a class="pager__link" href="/post/kubernetes-pod1/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
 			<p class="pager__title">Kubernetes Pod</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/post/kubernetes-daemonset/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Kubernetes Daemonset</p>
 		</a>
 	</div>
 </nav>
