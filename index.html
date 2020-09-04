@@ -12,7 +12,7 @@
 <meta property="og:description" content="Chi Woo Park&#39;s Personal blog about everything" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://chiwoo.bmdevs.com/" />
-<meta property="og:updated_time" content="2020-09-03T13:10:29+09:00" />
+<meta property="og:updated_time" content="2020-09-03T14:53:38+09:00" />
 
 		<meta itemprop="name" content="나의 블로그">
 <meta itemprop="description" content="Chi Woo Park&#39;s Personal blog about everything">
@@ -108,6 +108,25 @@ if (!doNotTrack) {
 	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
+			<a href="/post/kubernetes-job/" rel="bookmark">
+			Kubernetes Job
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">chupark</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-03T14:53:38&#43;09:00">2020-09-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes-pod/" rel="category">kubernetes pod</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Job, 잡 Kubernetes는 계속 실행하는 포드가 아닌 작업이 완료되면 종료되는 포드가 있다. 레플리카셋 데몬셋 등 리소스는 포드를 계속 실행시키지만, 잡은 작업이 완료되면 포드를 종료시킨다.
+기본  잡은 프로세스가 완료되어도 컨테이너가 다시 시작되지 않도록 하는 포드를 실행한다. 노드 장애가 발생하면 레플리카셋과 마찬가지로 다른 노드로 다시 스케줄된다. 프로세스 자체 오류가 발생하는 경우, 잡은 컨테이너를 다시 시작하도록 구성할 수 있다. 개별 포드로도 태스크를 실행하고 완료될 때 까지 기다릴 수 있지만, 작업 시간동안 노드 장애 등의 원인으로 인해 태스크를 정상적으로 마치지 못했을 경우 사용자가 이를 감지하고 수동으로 작업을 다시 생성해야한다.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
 			<a href="/post/kubernetes-daemonset/" rel="bookmark">
 			Kubernetes Daemonset
 			</a>
@@ -180,6 +199,7 @@ if (!doNotTrack) {
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/kubernetes-job/">Kubernetes Job</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/kubernetes-daemonset/">Kubernetes Daemonset</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/kubernetes-replicaset/">Kubernetes Replicaset</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/kubernetes-pod1/">Kubernetes Pod</a></li>
