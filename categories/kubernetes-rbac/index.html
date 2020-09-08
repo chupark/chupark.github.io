@@ -4,20 +4,20 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Abouts - 나의 블로그</title>
+	<title>kubernetes RBAC - 나의 블로그</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="Abouts" />
+		<meta property="og:title" content="kubernetes RBAC" />
 <meta property="og:description" content="Chi Woo Park&#39;s Personal blog about everything" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://chiwoo.bmdevs.com/about/" />
-<meta property="og:updated_time" content="2020-09-03T13:10:29+09:00" />
+<meta property="og:url" content="https://chiwoo.bmdevs.com/categories/kubernetes-rbac/" />
+<meta property="og:updated_time" content="2020-09-04T16:33:25+09:00" />
 
-		<meta itemprop="name" content="Abouts">
+		<meta itemprop="name" content="kubernetes RBAC">
 <meta itemprop="description" content="Chi Woo Park&#39;s Personal blog about everything">
 
 		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Abouts"/>
+<meta name="twitter:title" content="kubernetes RBAC"/>
 <meta name="twitter:description" content="Chi Woo Park&#39;s Personal blog about everything"/>
 
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -26,7 +26,7 @@
 
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
-	<link rel="alternate" type="application/rss+xml" href="/about/index.xml" title="나의 블로그">
+	<link rel="alternate" type="application/rss+xml" href="/categories/kubernetes-rbac/index.xml" title="나의 블로그">
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
@@ -100,23 +100,26 @@ if (!doNotTrack) {
 			
 <main class="main list" role="main">
 	<header class="main__header">
-		<h1 class="main__title">Abouts</h1>
+		<h1 class="main__title">kubernetes RBAC</h1>
 	</header>
 	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/about/about/" rel="bookmark">
-			About Me
+			<a href="/post/kubernetes-aks-aad/" rel="bookmark">
+			AKS RBAC 과 Azure AD 통합
 			</a>
 		</h3>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">chupark</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-03T13:10:29&#43;09:00">2020-09-03</time></div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-04T16:33:25&#43;09:00">2020-09-04</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes-rbac/" rel="category">kubernetes RBAC</a>
+	</span>
+</div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		소개 페이지 작성 dzez
+		AAD와 AKS의 RBAC Kubernetes 클러스터 보안을 위해 Kubernetes 리소스를 컨트롤 할 수 있는 사용자를 제한할 수 있다. 예를 들어 클러스터 관리자를 한 명 선정하고 그 관리자 에게만 포드, 서비스등 리소스를 배포할 수 있는 권한을 부여할 수 있다. AKS를 사용하면 손쉽게 Azure AD의 원하는 사용자, 그룹에게 해당 작업을 수행할 수 있다.
+이를 위해선 클러스터의 RBAC 플러그인을 활성화하고, AKS관리형 Azure AD 기능이 &ldquo;사용&rdquo; 상태로 배포됐어야한다.   　기본    Kubernetes는 사용자 정보를 클러스터 내부에 저장하지 않는다.
 	</div>
 </article>
 	

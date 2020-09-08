@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AKS RBAC 과 Azure AD 통합 - 나의 블로그</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="AKS RBAC 과 Azure AD 통합" />
+<meta property="og:description" content="AAD와 AKS의 RBAC Kubernetes 클러스터 보안을 위해 Kubernetes 리소스를 컨트롤 할 수 있는 사용자를 제한할 수 있다. 예를 들어 클러스터 관리자를 한 명 선정하고 그 관리자 에게만 포드, 서비스등 리소스를 배포할 수 있는 권한을 부여할 수 있다. AKS를 사용하면 손쉽게 Azure AD의 원하는 사용자, 그룹에게 해당 작업을 수행할 수 있다.
+이를 위해선 클러스터의 RBAC 플러그인을 활성화하고, AKS관리형 Azure AD 기능이 &ldquo;사용&rdquo; 상태로 배포됐어야한다.   　기본    Kubernetes는 사용자 정보를 클러스터 내부에 저장하지 않는다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chiwoo.bmdevs.com/post/kubernetes-aks-aad/" />
+<meta property="article:published_time" content="2020-09-04T16:33:25+09:00" />
+<meta property="article:modified_time" content="2020-09-04T16:33:25+09:00" />
+
+		<meta itemprop="name" content="AKS RBAC 과 Azure AD 통합">
+<meta itemprop="description" content="AAD와 AKS의 RBAC Kubernetes 클러스터 보안을 위해 Kubernetes 리소스를 컨트롤 할 수 있는 사용자를 제한할 수 있다. 예를 들어 클러스터 관리자를 한 명 선정하고 그 관리자 에게만 포드, 서비스등 리소스를 배포할 수 있는 권한을 부여할 수 있다. AKS를 사용하면 손쉽게 Azure AD의 원하는 사용자, 그룹에게 해당 작업을 수행할 수 있다.
+이를 위해선 클러스터의 RBAC 플러그인을 활성화하고, AKS관리형 Azure AD 기능이 &ldquo;사용&rdquo; 상태로 배포됐어야한다.   　기본    Kubernetes는 사용자 정보를 클러스터 내부에 저장하지 않는다.">
+<meta itemprop="datePublished" content="2020-09-04T16:33:25+09:00" />
+<meta itemprop="dateModified" content="2020-09-04T16:33:25+09:00" />
+<meta itemprop="wordCount" content="334">
+
+
+
+<meta itemprop="keywords" content="kubernetes,AKS," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AKS RBAC 과 Azure AD 통합"/>
+<meta name="twitter:description" content="AAD와 AKS의 RBAC Kubernetes 클러스터 보안을 위해 Kubernetes 리소스를 컨트롤 할 수 있는 사용자를 제한할 수 있다. 예를 들어 클러스터 관리자를 한 명 선정하고 그 관리자 에게만 포드, 서비스등 리소스를 배포할 수 있는 권한을 부여할 수 있다. AKS를 사용하면 손쉽게 Azure AD의 원하는 사용자, 그룹에게 해당 작업을 수행할 수 있다.
+이를 위해선 클러스터의 RBAC 플러그인을 활성화하고, AKS관리형 Azure AD 기능이 &ldquo;사용&rdquo; 상태로 배포됐어야한다.   　기본    Kubernetes는 사용자 정보를 클러스터 내부에 저장하지 않는다."/>
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-177056541-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="내 블로그" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/placeholder.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">내 블로그</div>
+					<div class="logo__tagline">어서 오셔요</div>
+				</div>
+		</a>
+	</div>
+		<style>
+.menu__item {
+	text-align: center
+}
+
+.menu__link {
+	width: 120px
+}
+</style>
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				<span class="menu__text" style="text-align: center">Home</span>
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/about/about">
+				<span class="menu__text" style="text-align: center">About</span>
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				<span class="menu__text" style="text-align: center">Categories</span>
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				<span class="menu__text">Tags</span>
+			</a>
+		</li>
+	</ul>
+</nav>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">AKS RBAC 과 Azure AD 통합</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">chupark</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-04T16:33:25&#43;09:00">2020-09-04</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes-rbac/" rel="category">kubernetes RBAC</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#기본">기본</a>
+      <ul>
+        <li><a href="#클러스터-어드민-조회">클러스터 어드민 조회</a></li>
+        <li><a href="#네임스페이스-역할-만들기">네임스페이스 역할 만들기</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h1 id="aad와-aks의-rbac">AAD와 AKS의 RBAC</h1>
+<p>Kubernetes 클러스터 보안을 위해 Kubernetes 리소스를 컨트롤 할 수 있는 사용자를 제한할 수 있다. 예를 들어 클러스터 관리자를 한 명 선정하고 그 관리자 에게만 포드, 서비스등 리소스를 배포할 수 있는 권한을 부여할 수 있다. AKS를 사용하면 손쉽게 Azure AD의 원하는 사용자, 그룹에게 해당 작업을 수행할 수 있다.<br>
+이를 위해선 클러스터의 RBAC 플러그인을 활성화하고, AKS관리형 Azure AD 기능이 &ldquo;사용&rdquo; 상태로 배포됐어야한다.
+<figure>
+    <img src="/img/rbac/aks-role2.png"/> 
+</figure>
+</p>
+<p>　
+<!-- raw HTML omitted --></p>
+<h2 id="기본">기본</h2>
+<hr>
+<figure>
+    <img src="/img/rbac/aks-role1.png"/> 
+</figure>
+
+<p>Kubernetes는 사용자 정보를 클러스터 내부에 저장하지 않는다. 대신 RBAC 플러그인과 Azure AD등 클러스터 외부의 사용자 정보 시스템과 상호작용을 통해 해당 유저가 작업을 수행하기 위한 권한이 있는지 체크한다. 이를 위해 Kubernetes에는 롤(Role), 롤바인딩(RoleBinding) 리소스가 존재한다. 따라서 권한을 만들기 위해 Kubernetes 네임스페이스에 롤 리소스를 만들고, Azure AD의 사용자나 그룹을 해당 롤에 매핑시키는 롤바인딩 리소스를 만들어 사용자의 인증과 권한을 동시에 관리할 수 있다. 특정 네임스페이스 뿐만 아니라 클러스터 레벨 롤과 롤 바인딩도 존재한다.</p>
+<!-- raw HTML omitted -->
+<blockquote>
+<p><strong><em>NOTE :</em></strong>  사용자 계정을 저장하지 않는대신 클러스터엔 서비스어카운트 라는 계정을 생성할 수 있는데, 사용자 대신 Azure 리소를 만들고 조회하는 Azure AD App과 같이 Kubernetes 클러스터의 리소스와 상호작용하는 서비스계정이다.</p>
+</blockquote>
+<p>　</p>
+<h3 id="클러스터-어드민-조회">클러스터 어드민 조회</h3>
+<hr>
+<p>AKS 와 Azure AD 를 통합하여 배포하면 모든 권한을 가진 클러스터 어드민 롤과 롤바인딩 리소스가 자동으로 생성된다.</p>
+<ul>
+<li>클러스터 롤
+<figure>
+    <img src="/img/rbac/aks-role4.png"/> 
+</figure>
+
+<figure>
+    <img src="/img/rbac/aks-role4-1.png"/> 
+</figure>
+
+　</li>
+<li>클러스터 롤바인딩
+<figure>
+    <img src="/img/rbac/aks-role5.png"/> 
+</figure>
+
+<figure>
+    <img src="/img/rbac/aks-role6.png"/> 
+</figure>
+
+클러스터 롤바인딩의 Kind가 Group으로 되어있고 그룹의 ID를 Name 필드에서 확인할 수 있다. 해당 그룹을 Azure AD에서 조회하면 그룹 ID가 동일함을 확인할 수 있다.
+<figure>
+    <img src="/img/rbac/aks-role7.png"/> 
+</figure>
+</li>
+</ul>
+<p>　</p>
+<h3 id="네임스페이스-역할-만들기">네임스페이스 역할 만들기</h3>
+<hr>
+<p>특정 사용자의 역할을 네임스페이스 범위에 바인딩 할 수 있다. 이를 위해서 dev 네임스페이스를 만들고 네임스페이스에 롤을 만든다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
+<span style="color:#66d9ef">kind</span>: Role
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: devRole
+  <span style="color:#66d9ef">namespace</span>: dev
+<span style="color:#66d9ef">rules</span>:
+- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>]
+  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
+  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
+</code></pre></div><p>모든 작업을 수행할 수 있는 역할을 만들었으니 이제 사용자에게 해당 롤을 바인딩 시키는 롤바인딩을 만든다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
+<span style="color:#66d9ef">kind</span>: RoleBinding
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: devRole
+  <span style="color:#66d9ef">namespace</span>: dev
+<span style="color:#66d9ef">subjects</span>:
+- <span style="color:#66d9ef">kind</span>: User
+  <span style="color:#66d9ef">name</span>: 4f64&lt;Azure-AD-User-GUID<span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">  apiGroup: rbac.authorization.k8s.io</span>
+  <span style="color:#66d9ef">namespace</span>: dev
+<span style="color:#66d9ef">roleRef</span>:
+  <span style="color:#66d9ef">kind</span>: Role
+  <span style="color:#66d9ef">name</span>: devRole
+  <span style="color:#66d9ef">apiGroup</span>: rbac.authorization.k8s.io
+</code></pre></div><p>　<br>
+위의 설정을 변경하고 롤바인딩의 계정으로 kubectl 명령을 사용해본다.
+<figure>
+    <img src="/img/rbac/aks-role9.png"/> 
+</figure>
+
+kubectl 명령을 사용하기 위해 추가 인증을 진행하며, 기본 네임스페이스인 default에는 권한이 없어 포드를 조회할 수 없다는 에러메시지가 출력된다. 대신 dev 네임스페이스의 포드는 조회할 수 있음을 알 수 있다.</p>
+<p>이렇게 Azure AD와 AKS의 RBAC을 통합하여 클러스터 보안을 향상시킬 수 있다.</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/kubernetes/" rel="tag">kubernetes</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/aks/" rel="tag">AKS</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="chupark avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About chupark</span>
+	</div>
+	<div class="authorbox__description">
+		경제적 자유를 위하여&hellip;
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/post/kubernetes-daemonset/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Kubernetes Daemonset</p>
+		</a>
+	</div>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://chiwoo-bmdevs-com.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Chi Woo Park.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
