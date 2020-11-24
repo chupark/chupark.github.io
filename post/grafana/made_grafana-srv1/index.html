@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Azure 리소스 모니터링 서버 만들기 (1) - 나의 블로그</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Azure 리소스 모니터링 서버 만들기 (1)" />
+<meta property="og:description" content="Azure 기본 모니터  Azure 모니터는 Azure 뿐만 아니라 On-premise, 다른 클라우드 환경의 모니터링 데이터를 수집, 분석할 수 있으며 여러가지 알림을 보낼 수 있습니다. Azure에서 VM을 만들 경우 아래 그림처럼 VM의 모니터링 블레이드에서 기본적으로 CPU, 디스크, 네트워크 메트릭을 확인할 수 있습니다.   아쉽게도 메모리를 확인하려면 OMS Agent 혹은 VM Guest 에이전트를 설치해야 합니다.
+모니터링 대시보드를 만드는 과정은 약간 처참하지만, 시간을 들이면 아래와 같은 화면을 만들 수도 있습니다.
+  위의 대시보드는 Azure의 Workbooks 기능으로 Azure Metric API가 제공하는 데이터를 사용하여 만들어집니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chiwoo.bmdevs.com/post/grafana/made_grafana-srv1/" />
+<meta property="article:published_time" content="2020-11-24T21:29:55+09:00" />
+<meta property="article:modified_time" content="2020-11-24T21:29:55+09:00" />
+
+		<meta itemprop="name" content="Azure 리소스 모니터링 서버 만들기 (1)">
+<meta itemprop="description" content="Azure 기본 모니터  Azure 모니터는 Azure 뿐만 아니라 On-premise, 다른 클라우드 환경의 모니터링 데이터를 수집, 분석할 수 있으며 여러가지 알림을 보낼 수 있습니다. Azure에서 VM을 만들 경우 아래 그림처럼 VM의 모니터링 블레이드에서 기본적으로 CPU, 디스크, 네트워크 메트릭을 확인할 수 있습니다.   아쉽게도 메모리를 확인하려면 OMS Agent 혹은 VM Guest 에이전트를 설치해야 합니다.
+모니터링 대시보드를 만드는 과정은 약간 처참하지만, 시간을 들이면 아래와 같은 화면을 만들 수도 있습니다.
+  위의 대시보드는 Azure의 Workbooks 기능으로 Azure Metric API가 제공하는 데이터를 사용하여 만들어집니다.">
+<meta itemprop="datePublished" content="2020-11-24T21:29:55+09:00" />
+<meta itemprop="dateModified" content="2020-11-24T21:29:55+09:00" />
+<meta itemprop="wordCount" content="473">
+
+
+
+<meta itemprop="keywords" content="Grafana,Azure," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Azure 리소스 모니터링 서버 만들기 (1)"/>
+<meta name="twitter:description" content="Azure 기본 모니터  Azure 모니터는 Azure 뿐만 아니라 On-premise, 다른 클라우드 환경의 모니터링 데이터를 수집, 분석할 수 있으며 여러가지 알림을 보낼 수 있습니다. Azure에서 VM을 만들 경우 아래 그림처럼 VM의 모니터링 블레이드에서 기본적으로 CPU, 디스크, 네트워크 메트릭을 확인할 수 있습니다.   아쉽게도 메모리를 확인하려면 OMS Agent 혹은 VM Guest 에이전트를 설치해야 합니다.
+모니터링 대시보드를 만드는 과정은 약간 처참하지만, 시간을 들이면 아래와 같은 화면을 만들 수도 있습니다.
+  위의 대시보드는 Azure의 Workbooks 기능으로 Azure Metric API가 제공하는 데이터를 사용하여 만들어집니다."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-177056541-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="내 블로그" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/placeholder.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">내 블로그</div>
+					<div class="logo__tagline">어서 오셔요</div>
+				</div>
+		</a>
+	</div>
+		<style>
+.menu__item {
+	text-align: center
+}
+
+.menu__link {
+	width: 120px
+}
+</style>
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1"></span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				<span class="menu__text" style="text-align: center">Home</span>
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/about/about">
+				<span class="menu__text" style="text-align: center">About</span>
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				<span class="menu__text" style="text-align: center"></span>
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				<span class="menu__text"></span>
+			</a>
+		</li>
+	</ul>
+</nav>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Azure 리소스 모니터링 서버 만들기 (1)</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">chupark</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-11-24T21:29:55&#43;09:00">2020-11-24</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/monitoring/" rel="category">Monitoring</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title"></div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#azure-기본-모니터">Azure 기본 모니터</a></li>
+    <li><a href="#azure-with-grafana-모니터링">Azure with Grafana 모니터링</a>
+      <ul>
+        <li><a href="#데이터는-어디에-저장되는데">데이터는 어디에 저장되는데?</a></li>
+        <li><a href="#사용자-관리와-보안은">사용자 관리와 보안은?</a></li>
+      </ul>
+    </li>
+    <li><a href="#azure-with-grafana-서버-구성하기">Azure with Grafana 서버 구성하기</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h2 id="azure-기본-모니터">Azure 기본 모니터</h2>
+<hr>
+<p>Azure 모니터는 Azure 뿐만 아니라 On-premise, 다른 클라우드 환경의 모니터링 데이터를 수집, 분석할 수 있으며 여러가지 알림을 보낼 수 있습니다. Azure에서 VM을 만들 경우 아래 그림처럼 VM의 모니터링 블레이드에서 기본적으로 CPU, 디스크, 네트워크 메트릭을 확인할 수 있습니다. 
+<figure>
+    <img src="/img/grafana/azure-monitor.png"/> 
+</figure>
+</p>
+<p>아쉽게도 메모리를 확인하려면 OMS Agent 혹은 VM Guest 에이전트를 설치해야 합니다.<br>
+모니터링 대시보드를 만드는 과정은 약간 처참하지만, 시간을 들이면 아래와 같은 화면을 만들 수도 있습니다.</p>
+<p><figure>
+    <img src="/img/grafana/azure-workbooks.png"/> 
+</figure>
+
+위의 대시보드는 Azure의 Workbooks 기능으로 Azure Metric API가 제공하는 데이터를 사용하여 만들어집니다. Workbooks는 몇 번의 클릭으로 만들 수 있으며, Log Analytics + Qusto 쿼리를 조합하여 만들 수도 있습니다. 말로 설명하니 엄청 쉬워보이지만, 실제로 만들어보면 아래처럼 엄청 복잡한 작업과 노가다가 필요한 작업 입니다. Workbooks를 사용하여 모니터링 대시보드를 만드는 방법은 언제가 될지 모르겠지만.. 추후 포스트에서 다뤄보도록 하겠습니다.</p>
+<figure>
+    <img src="/img/grafana/azure-workbooks2.png"/> 
+</figure>
+
+<p>이 방법의 장점이 있다면, 단순히 Azure Metric API 데이터를 Workbooks로 표현할 경우 완전 무료라는 것 입니다. 또한 시간을 들인만큼 시인성이 뛰어난 화면을 만들 수 있단 것 입니다. 반면, 단점을 뽑아보자면 대시보드내 검색기능 불가, 대시보드 고정 불가 등.. Grafana에 비해 보여지는 단점들이 너무 많습니다. 하지만 앞서 말했듯&hellip; 무료 라는 아주 큰 강점이 있습니다.</p>
+<!-- raw HTML omitted -->
+<p>아래 사진은  Workbooks를 하나의 공유 대시보드에 Pin을 한 상태 입니다. 먼저 큰 틀을 살펴보면 대시보드 수준의 검색기능이 없습니다. 박스 안의 검색 기능은 해당 박스 내에서만 작동하므로, 여러 모니터링 패널이 있을 경우 통합 검색이 불가능 합니다. 여기서 재밌는 점은 Workbooks는 기본적으로 통합 검색을 지원하는데, 해당 Workbooks 전체를 대시보드에 Pin을 할 경우 맨 아래 작은 박스처럼 Workbooks로 넘어가는 링크 이미지만 생성됩니다.
+<figure>
+    <img src="/img/grafana/azure-monitor-dashboard.png"/> 
+</figure>
+</p>
+<p>　
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted --></p>
+<h2 id="azure-with-grafana-모니터링">Azure with Grafana 모니터링</h2>
+<hr>
+<p>포스트의 주제인 Azure with Grafana를 이제부터 알아보겠습니다. Grafana 모니터링을 사용하면 Azure Monitor에서 있었던 다소 아쉬운 부분들을 커버할 수 있습니다. 먼저 Azure 대시보드를 만드는 것 보다 방법이 매우 쉽습니다. 몇 가지 설정을 하고 클릭 조금이면 훌륭한 대시보드를 만들 수 있습니다. 또한 대시보드 수준 검색 기능을 제공하여 원하는 데이터를 한 눈에 확인할 수 있는 장점이 있습니다.<br>
+<figure>
+    <img src="/img/grafana/grafana1.png"/> 
+</figure>
+<br>
+<!-- raw HTML omitted --></p>
+<h3 id="데이터는-어디에-저장되는데">데이터는 어디에 저장되는데?</h3>
+<p>Grafana를 접해보신 분들이라면 대시보드를 만들기 위해 먼저 데이터 원본을 연결하고, 패널을 만들었을 것 입니다. Azure with Grafana 구성에서는 데이터를 따로 저장하지 않습니다. Azure에서 기본으로 제공하는 Metric API를 쿼리하여 데이터를 가져오기 때문에, 메트릭 저장용 DB가 필요 없습니다. 다만 Azure 데이터를 쿼리 해오기 위한 Service Account(Azure에선 서비스 주체) 즉, Azure AD App이 필요합니다. 그림으로 표현하면 아래와 같습니다.</p>
+<figure>
+    <img src="/img/grafana/azure-aad1.png"/> 
+</figure>
+
+<p>또한, 아래 그림처럼 여러 테넌트의 구독에 있는 리소스의 메트릭을 하나의 Grafana 서버에서 표현할 수도 있습니다.</p>
+<p><figure>
+    <img src="/img/grafana/azure-aad2.png"/> 
+</figure>
+<br>
+<!-- raw HTML omitted --></p>
+<h3 id="사용자-관리와-보안은">사용자 관리와 보안은?</h3>
+<p>Grafana는 자체적으로 로그인 기능을 지원합니다. 또한 Oauth도 지원하여 Microsoft, Google등 외부 디렉토리 서비스와 통합하여 사용할 수 있습니다. Azure AD 로그인 기능을 예로 들면, Azure AD에 등록된 사용자만 Grafana 서버에 로그인 할 수 있도록 구성할 수 있습니다. 또한 테넌트가 여러개일 경우 Organization 기능을 사용하여 테넌트별로 데이터소스와 대시보드를 구성할 수 있습니다. 그리고 각 Organization에 구성된 사용자별로 Admin, Editor, Viewer 3가지 권한을 부여할 수 있습니다. Organization 기능은 Grafana의 빌트인 기능 입니다.
+<figure>
+    <img src="/img/grafana/grafana-login.png"/> 
+</figure>
+</p>
+<p>　
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted --></p>
+<h2 id="azure-with-grafana-서버-구성하기">Azure with Grafana 서버 구성하기</h2>
+<hr>
+<p>위에서 몇 가지 기본 사항을 알아봤으니 다음 포스트 부터는 실제로 서버를 구성해보도록 하겠습니다.<br>
+컨텐츠는 아래 목차로 진행될 예정 입니다.</p>
+<ul>
+<li>Grafana 설치 &amp; Azure 플러그인 사용</li>
+<li>HTTPS, Grafana 로그인에 Azure AD 인증 사용</li>
+<li>Slack 알림 구성하기</li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/grafana/" rel="tag">Grafana</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/azure/" rel="tag">Azure</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="chupark avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name"></span>
+	</div>
+	<div class="authorbox__description">
+		경제적 자유를 위하여&hellip;
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/post/kubernetes-aks-aad/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;</span>
+			<p class="pager__title">AKS RBAC 과 Azure AD 통합</p>
+		</a>
+	</div>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://chiwoo-bmdevs-com.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Chi Woo Park.
+			<span class="footer__copyright-credits"></span>
+		</div>
+	</div>
+</footer>
+
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

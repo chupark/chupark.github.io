@@ -31,6 +31,7 @@
 <meta name="twitter:description" content="Daemonset, 데몬셋 레플리카셋은 Kubernetes 클러스터의 특정 위치에 배포된 특정 개수의 포드를 실행하는 데 사용된다. 그러나 노드 로그 수집기, 노드 리소스 모니터 수집기 등 각 노드에서 정확히 하나의 포드를 실행해야 하는 경우가 있다. 이 경우 데몬셋을 사용한다.
 기본  데몬셋에 의해 만들어진 포드는 이미 대상 노드가 지정돼 욌고 Kubernetes 스케줄러를 패스한다. 데몬셋은 레플리카의 개념이 없고 노드가 있는 수만큼 포드를 생성하고 노드 각각에 포드를 하나씩 배포한다. 노드가 다운되면 데몬셋은 다운된 노드의 포드를 다른 노드로 스케줄하지 않는다."/>
 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
@@ -78,7 +79,7 @@ if (!doNotTrack) {
 </style>
 <nav class="menu">
 	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
-		<span class="menu__btn-title" tabindex="-1">Menu</span>
+		<span class="menu__btn-title" tabindex="-1"></span>
 	</button>
 	<ul class="menu__list">
 		<li class="menu__item">
@@ -93,12 +94,12 @@ if (!doNotTrack) {
 		</li>
 		<li class="menu__item">
 			<a class="menu__link" href="/categories/">
-				<span class="menu__text" style="text-align: center">Categories</span>
+				<span class="menu__text" style="text-align: center"></span>
 			</a>
 		</li>
 		<li class="menu__item">
 			<a class="menu__link" href="/tags/">
-				<span class="menu__text">Tags</span>
+				<span class="menu__text"></span>
 			</a>
 		</li>
 	</ul>
@@ -121,7 +122,7 @@ if (!doNotTrack) {
 </div></div>
 		</header>
 <div class="post__toc toc">
-	<div class="toc__title">Page content</div>
+	<div class="toc__title"></div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
   <ul>
@@ -150,24 +151,24 @@ if (!doNotTrack) {
 <h3 id="데몬셋-정의">데몬셋 정의</h3>
 <hr>
 <p>아래 예시처럼 SSD를 사용하는 노드가 있다고 가정하고 5초마다 &ldquo;SSD OK&quot;를 표준 출력에 보여주는 ssd-monitor 프로세스를 실행하는 데몬셋을 생성해본다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: DaemonSet
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: ssd-monitor
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: ssd-monitor
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: ssd-monitor
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">nodeSelector</span>:
-        <span style="color:#66d9ef">ssd</span>: <span style="color:#e6db74">&#34;true&#34;</span>
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: main
-        <span style="color:#66d9ef">image</span>: luksa/ssd-monitor
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">DaemonSet</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ssd-monitor</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ssd-monitor</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ssd-monitor</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">nodeSelector</span>:
+        <span style="color:#f92672">ssd</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">main</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">luksa/ssd-monitor</span>
 </code></pre></div><!-- raw HTML omitted -->
 <p>그 결과 아래 그림처럼 SSD=true 라벨을 가진 노드에 데몬셋에 의해 만들어진 포드가 배포됐음을 확인할 수 있다. 만약 노드의 라벨이 SSD=false로 변경되거나 라벨이 삭제되면 해당 노드에 있는 데몬셋 포드는 삭제된다.</p>
 <figure>
@@ -195,7 +196,7 @@ if (!doNotTrack) {
 		<img alt="chupark avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About chupark</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		경제적 자유를 위하여&hellip;
@@ -205,13 +206,13 @@ if (!doNotTrack) {
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
 		<a class="pager__link" href="/post/kubernetes-replicaset/" rel="prev">
-			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<span class="pager__subtitle">«&thinsp;</span>
 			<p class="pager__title">Kubernetes Replicaset</p>
 		</a>
 	</div>
 	<div class="pager__item pager__item--next">
 		<a class="pager__link" href="/post/kubernetes-aks-aad/" rel="next">
-			<span class="pager__subtitle">Next&thinsp;»</span>
+			<span class="pager__subtitle">&thinsp;»</span>
 			<p class="pager__title">AKS RBAC 과 Azure AD 통합</p>
 		</a>
 	</div>
@@ -235,7 +236,7 @@ s.setAttribute('data-timestamp', +new Date());
 		
 		<div class="footer__copyright">
 			&copy; 2020 Chi Woo Park.
-			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+			<span class="footer__copyright-credits"></span>
 		</div>
 	</div>
 </footer>

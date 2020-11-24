@@ -6,10 +6,15 @@
     <description>Recent content in Categories on 나의 블로그</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Fri, 04 Sep 2020 16:33:25 +0900</lastBuildDate>
-    
-	<atom:link href="https://chiwoo.bmdevs.com/categories/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 24 Nov 2020 21:29:55 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Monitoring</title>
+      <link>https://chiwoo.bmdevs.com/categories/monitoring/</link>
+      <pubDate>Tue, 24 Nov 2020 21:29:55 +0900</pubDate>
+      
+      <guid>https://chiwoo.bmdevs.com/categories/monitoring/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>kubernetes RBAC</title>
