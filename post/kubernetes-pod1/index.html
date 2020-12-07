@@ -79,7 +79,7 @@ if (!doNotTrack) {
 </style>
 <nav class="menu">
 	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
-		<span class="menu__btn-title" tabindex="-1"></span>
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
 	</button>
 	<ul class="menu__list">
 		<li class="menu__item">
@@ -94,12 +94,12 @@ if (!doNotTrack) {
 		</li>
 		<li class="menu__item">
 			<a class="menu__link" href="/categories/">
-				<span class="menu__text" style="text-align: center"></span>
+				<span class="menu__text" style="text-align: center">Categories</span>
 			</a>
 		</li>
 		<li class="menu__item">
 			<a class="menu__link" href="/tags/">
-				<span class="menu__text"></span>
+				<span class="menu__text">Tags</span>
 			</a>
 		</li>
 	</ul>
@@ -122,7 +122,7 @@ if (!doNotTrack) {
 </div></div>
 		</header>
 <div class="post__toc toc">
-	<div class="toc__title"></div>
+	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
   <ul>
@@ -161,18 +161,18 @@ if (!doNotTrack) {
 <li><strong>HTTP GET</strong> 프로브는 지정한 IP, 포트, 경로에 HTTP GET 요청을 수행한다. 프로브가 응답을 수신하고 응답 코드가 오류를 나타내지 않을 경우(HTTP status : 2XX, 3XX) 프로브는 성공한 것으로 간주한다. 프로브가 실패하면 컨테이너를 재시작한다.</li>
 <li><strong>TCP</strong> 소켓 프로브가 컨테이너의 지정된 포트에 TCP 연결을 시도하고, 성공적으로 연결되면 프로브가 성공한 것이고 그렇지 않으면 컨테이너가 재시작된다.</li>
 <li><strong>Exec</strong> 프로브는 컨테이너 내부에 임의의 명령을 실행하고 명령의 종료 상태 코드를 확인한다. 상태코드가 0이면 검사가 성공적이다. 다른 모든 코드는 오류로 간주된다.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">pod</span>
-<span style="color:#f92672">spec</span>:
-    <span style="color:#f92672">containers</span>:
-    - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">my-image</span>
-    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">my-pod</span>
-    <span style="color:#f92672">livenessProbe</span>:
-        <span style="color:#f92672">httpGet</span>:
-          <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
-          <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+    <span style="color:#66d9ef">name</span>: pod
+<span style="color:#66d9ef">spec</span>:
+    <span style="color:#66d9ef">containers</span>:
+    - <span style="color:#66d9ef">image</span>: my-image
+    <span style="color:#66d9ef">name</span>: my-pod
+    <span style="color:#66d9ef">livenessProbe</span>:
+        <span style="color:#66d9ef">httpGet</span>:
+          <span style="color:#66d9ef">path</span>: /
+          <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
 </code></pre></div><blockquote>
 <p><strong><em>NOTE:</em></strong>  라이브니스 프로브가 실패하면, 컨테이너가 강제 종료되며 완전히 새로운 컨테이너가 생성된다. 기존 컨테이너가 재시작되는 것이 아니다.</p>
 </blockquote>
@@ -183,23 +183,23 @@ if (!doNotTrack) {
 <h4 id="라이브니스-프로브의-추가-속성">라이브니스 프로브의 추가 속성</h4>
 <hr>
 <p>위의 예시의 라이브니스 프로브 옵션 외에도 초기 지연 시간, 시간 초과, 기간 등과 같은 추가 속성을 지정할 수 있다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubia-liveness</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-  - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">luksa/kubia-unhealthy</span>
-    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubia</span>
-    <span style="color:#f92672">livenessProbe</span>:
-      <span style="color:#f92672">httpGet</span>:
-        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
-        <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
-      <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">15</span>
-      <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">10</span>
-      <span style="color:#f92672">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
-      <span style="color:#f92672">successThreshold</span>: <span style="color:#ae81ff">1</span>
-      <span style="color:#f92672">failureThreshold</span>: <span style="color:#ae81ff">3</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia-liveness
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">containers</span>:
+  - <span style="color:#66d9ef">image</span>: luksa/kubia-unhealthy
+    <span style="color:#66d9ef">name</span>: kubia
+    <span style="color:#66d9ef">livenessProbe</span>:
+      <span style="color:#66d9ef">httpGet</span>:
+        <span style="color:#66d9ef">path</span>: /
+        <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#66d9ef">initialDelaySeconds</span>: <span style="color:#ae81ff">15</span>
+      <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+      <span style="color:#66d9ef">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
+      <span style="color:#66d9ef">successThreshold</span>: <span style="color:#ae81ff">1</span>
+      <span style="color:#66d9ef">failureThreshold</span>: <span style="color:#ae81ff">3</span>
 </code></pre></div><ul>
 <li><strong>initialDelaySeconds</strong> : 첫번째 프로브 지연시간.</li>
 <li><strong>periodSeconds</strong> : 프로브 간격.</li>
@@ -212,62 +212,62 @@ if (!doNotTrack) {
 <h3 id="스타트업-프로브">스타트업 프로브</h3>
 <hr>
 <p>초기 구동 시간이 매우 긴 애플리케이션을 위한 프로브로, 스타트업 프로브 시간동안 프로브 헬스체크에 성공하면 라이브니스 프로브로 프로브가 전환된다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubia-liveness</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-  - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">luksa/kubia-unhealthy</span>
-    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubia</span>
-    <span style="color:#f92672">livenessProbe</span>:
-      <span style="color:#f92672">httpGet</span>:
-        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
-        <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
-      <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">15</span>
-      <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">10</span>
-      <span style="color:#f92672">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
-      <span style="color:#f92672">successThreshold</span>: <span style="color:#ae81ff">1</span>
-    <span style="color:#f92672">startupProbe</span>:
-      <span style="color:#f92672">httpGet</span>:
-        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
-        <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
-      <span style="color:#f92672">failureThreshold</span>: <span style="color:#ae81ff">30</span>
-      <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia-liveness
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">containers</span>:
+  - <span style="color:#66d9ef">image</span>: luksa/kubia-unhealthy
+    <span style="color:#66d9ef">name</span>: kubia
+    <span style="color:#66d9ef">livenessProbe</span>:
+      <span style="color:#66d9ef">httpGet</span>:
+        <span style="color:#66d9ef">path</span>: /
+        <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#66d9ef">initialDelaySeconds</span>: <span style="color:#ae81ff">15</span>
+      <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+      <span style="color:#66d9ef">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
+      <span style="color:#66d9ef">successThreshold</span>: <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">startupProbe</span>:
+      <span style="color:#66d9ef">httpGet</span>:
+        <span style="color:#66d9ef">path</span>: /
+        <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#66d9ef">failureThreshold</span>: <span style="color:#ae81ff">30</span>
+      <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">10</span>
 </code></pre></div><p>스타트업 프로브는 10초 * 30회로 300초의 스타트업 프로브 시간을 가진다. 스타트업 프로브 시간동안 400번 이하의 HTTP Status Code가 반환되면 스타트업 프로브를 성공으로 처리하고 라이브니스 프로브로 전환된다.</p>
 <p>　<br>
 <!-- raw HTML omitted --></p>
 <h3 id="레디네스-프로브">레디네스 프로브</h3>
 <hr>
 <p>애플리케이션이 초기 구동이 오래 걸리거나, 시작 직후 외부 의존성 때문에 요청을 처리하지 못할 수 있다. 이 경우 운영자는 컨테이너를 종료하고 싶지않고 요청도 보내고 싶지 않는다. Kubernetes는 이러한 상황을 감지하고 완화하기위한 레디네스 프로브를 제공한다. 컨테이너가 준비되지 않았다고 보고한 포드는 Kubernetes Services를 통해 트래픽을 수신받지 않는다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubia-liveness</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">containers</span>:
-  - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">luksa/kubia-unhealthy</span>
-    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubia</span>
-    <span style="color:#f92672">livenessProbe</span>:
-      <span style="color:#f92672">httpGet</span>:
-        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
-        <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
-      <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">15</span>
-      <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">10</span>
-      <span style="color:#f92672">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
-      <span style="color:#f92672">successThreshold</span>: <span style="color:#ae81ff">1</span>
-    <span style="color:#f92672">startupProbe</span>:
-      <span style="color:#f92672">httpGet</span>:
-        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/healthz</span>
-        <span style="color:#f92672">port</span>: <span style="color:#ae81ff">liveness-port</span>
-      <span style="color:#f92672">failureThreshold</span>: <span style="color:#ae81ff">30</span>
-      <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">10</span>
-    <span style="color:#f92672">readinessProbe</span>:
-      <span style="color:#f92672">httpGet</span>:
-        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
-        <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
-      <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">5</span>
-      <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">5</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia-liveness
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">containers</span>:
+  - <span style="color:#66d9ef">image</span>: luksa/kubia-unhealthy
+    <span style="color:#66d9ef">name</span>: kubia
+    <span style="color:#66d9ef">livenessProbe</span>:
+      <span style="color:#66d9ef">httpGet</span>:
+        <span style="color:#66d9ef">path</span>: /
+        <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#66d9ef">initialDelaySeconds</span>: <span style="color:#ae81ff">15</span>
+      <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+      <span style="color:#66d9ef">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
+      <span style="color:#66d9ef">successThreshold</span>: <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">startupProbe</span>:
+      <span style="color:#66d9ef">httpGet</span>:
+        <span style="color:#66d9ef">path</span>: /healthz
+        <span style="color:#66d9ef">port</span>: liveness-port
+      <span style="color:#66d9ef">failureThreshold</span>: <span style="color:#ae81ff">30</span>
+      <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+    <span style="color:#66d9ef">readinessProbe</span>:
+      <span style="color:#66d9ef">httpGet</span>:
+        <span style="color:#66d9ef">path</span>: /
+        <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#66d9ef">initialDelaySeconds</span>: <span style="color:#ae81ff">5</span>
+      <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">5</span>
 </code></pre></div><p>레디네스 프로브는 라이브니스 프로브와 같이 사용이 가능하다. 레디네스 프로브가 응답이 없으면 Kubernetes Service의 백앤드에서 제외가 될 것이고, 라이브니스 프로브가 응답이 없으면(애플리케이션 크래쉬) 컨테이너가 다시 만들어질 것 이다.</p>
 
 		</div>
@@ -290,7 +290,7 @@ if (!doNotTrack) {
 		<img alt="chupark avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name"></span>
+		<span class="authorbox__name">About chupark</span>
 	</div>
 	<div class="authorbox__description">
 		경제적 자유를 위하여&hellip;
@@ -300,7 +300,7 @@ if (!doNotTrack) {
 <nav class="pager flex">
 	<div class="pager__item pager__item--next">
 		<a class="pager__link" href="/post/kubernetes-replicaset/" rel="next">
-			<span class="pager__subtitle">&thinsp;»</span>
+			<span class="pager__subtitle">Next&thinsp;»</span>
 			<p class="pager__title">Kubernetes Replicaset</p>
 		</a>
 	</div>
@@ -324,7 +324,7 @@ s.setAttribute('data-timestamp', +new Date());
 		
 		<div class="footer__copyright">
 			&copy; 2020 Chi Woo Park.
-			<span class="footer__copyright-credits"></span>
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>
