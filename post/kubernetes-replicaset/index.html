@@ -148,23 +148,23 @@ if (!doNotTrack) {
 <h3 id="레플리카셋-정의">레플리카셋 정의</h3>
 <hr>
 <p>레플리카셋이 레플리케이션 컨트롤러와 다른점은 셀렉터다. 포드는 selector 속성 바로 아래에 있지 않고, selector.matchLabels 아래에 지정한다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: ReplicaSet
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: kubia
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">3</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: kubia
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: kubia
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: kubia
-        <span style="color:#66d9ef">image</span>: luksa/kubia
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ReplicaSet</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubia</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">kubia</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">kubia</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubia</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">luksa/kubia</span>
 </code></pre></div><p>　
 <!-- raw HTML omitted --></p>
 <p>레플리카셋은 레플리케이션컨트롤러와 다르지 않다. 셀렉터와 일치하는 세 개의 복제본이 있음을 보여준다.
@@ -177,26 +177,26 @@ if (!doNotTrack) {
 <h4 id="레플리카셋의-다양한-라벨-셀렉터-사용">레플리카셋의 다양한 라벨 셀렉터 사용</h4>
 <hr>
 <p>레플리카셋의 주요 개선점은 표현식이 뛰어난 라벨 셀렉터다. 아래 처럼 matchExpression 속성을 사용하도록 selector를 작성할 수 있다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1beta2
-<span style="color:#66d9ef">kind</span>: ReplicaSet
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: kubia
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">3</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchExpressions</span>:
-      - <span style="color:#66d9ef">key</span>: app
-        <span style="color:#66d9ef">operator</span>: In
-        <span style="color:#66d9ef">values</span>:
-         - kubia
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: kubia
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: kubia
-        <span style="color:#66d9ef">image</span>: luksa/kubia
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1beta2</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ReplicaSet</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubia</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchExpressions</span>:
+      - <span style="color:#f92672">key</span>: <span style="color:#ae81ff">app</span>
+        <span style="color:#f92672">operator</span>: <span style="color:#ae81ff">In</span>
+        <span style="color:#f92672">values</span>:
+         - <span style="color:#ae81ff">kubia</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">kubia</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kubia</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">luksa/kubia</span>
 </code></pre></div><p>　<br>
 레플리카셋은 포드를 항상 정의된 복제본 수 만큼 유지하도록 노력한다. 라벨이 일치하는 포드가 적으면 새로운 복제본을 생성하고 더 많으면 포드를 삭제하여 항상 정의된 수를 유지한다. 
 <figure>
@@ -237,7 +237,7 @@ if (!doNotTrack) {
 		<img alt="chupark avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About chupark</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		경제적 자유를 위하여&hellip;

@@ -191,30 +191,30 @@ if (!doNotTrack) {
 <h3 id="네임스페이스-역할-만들기">네임스페이스 역할 만들기</h3>
 <hr>
 <p>특정 사용자의 역할을 네임스페이스 범위에 바인딩 할 수 있다. 이를 위해서 dev 네임스페이스를 만들고 네임스페이스에 롤을 만든다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
-<span style="color:#66d9ef">kind</span>: Role
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: devRole
-  <span style="color:#66d9ef">namespace</span>: dev
-<span style="color:#66d9ef">rules</span>:
-- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>]
-  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
-  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">devRole</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">rules</span>:
+- <span style="color:#f92672">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>]
+  <span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
+  <span style="color:#f92672">verbs</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
 </code></pre></div><p>모든 작업을 수행할 수 있는 역할을 만들었으니 이제 사용자에게 해당 롤을 바인딩 시키는 롤바인딩을 만든다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
-<span style="color:#66d9ef">kind</span>: RoleBinding
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: devRole
-  <span style="color:#66d9ef">namespace</span>: dev
-<span style="color:#66d9ef">subjects</span>:
-- <span style="color:#66d9ef">kind</span>: User
-  <span style="color:#66d9ef">name</span>: 4f64&lt;Azure-AD-User-GUID<span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">  apiGroup: rbac.authorization.k8s.io</span>
-  <span style="color:#66d9ef">namespace</span>: dev
-<span style="color:#66d9ef">roleRef</span>:
-  <span style="color:#66d9ef">kind</span>: Role
-  <span style="color:#66d9ef">name</span>: devRole
-  <span style="color:#66d9ef">apiGroup</span>: rbac.authorization.k8s.io
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">RoleBinding</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">devRole</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">subjects</span>:
+- <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">User</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">4f64&lt;Azure-AD-User-GUID&gt;</span>
+  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">roleRef</span>:
+  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">devRole</span>
+  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
 </code></pre></div><p>　<br>
 위의 설정을 변경하고 롤바인딩의 계정으로 kubectl 명령을 사용해본다.
 <figure>
@@ -247,7 +247,7 @@ kubectl 명령을 사용하기 위해 추가 인증을 진행하며, 기본 네�
 		<img alt="chupark avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About chupark</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		경제적 자유를 위하여&hellip;

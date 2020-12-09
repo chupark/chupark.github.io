@@ -6,11 +6,7 @@
     <description>Recent content in kubernetes pod on 나의 블로그</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Thu, 03 Sep 2020 11:06:22 +0900</lastBuildDate>
-    
-	<atom:link href="https://chiwoo.bmdevs.com/categories/kubernetes-pod/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 03 Sep 2020 11:06:22 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/categories/kubernetes-pod/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetes Daemonset</title>
       <link>https://chiwoo.bmdevs.com/post/kubernetes-daemonset/</link>
