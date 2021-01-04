@@ -6,7 +6,18 @@
     <description>Recent content in Posts on 나의 블로그</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 09 Dec 2020 20:46:49 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Jan 2021 22:12:20 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure 리소스 모니터링 서버 만들기 (3)</title>
+      <link>https://chiwoo.bmdevs.com/post/grafana/made_grafana-srv3/</link>
+      <pubDate>Mon, 04 Jan 2021 22:12:20 +0900</pubDate>
+      
+      <guid>https://chiwoo.bmdevs.com/post/grafana/made_grafana-srv3/</guid>
+      <description>가상머신 CPU 대시보드 만들기  앞서 포스트에선 Grafana 설치와 Azure 플러그인을 사용하여 데이터소스를 연결하는 방법을 알아보았습니다. 이번 포스트에선 Azure VM을 모니터링하는 간단한 대시보드를 만들어 보겠습니다. 그리고 Azure Plugin 에서 사용할 수 있는 빌트인 변수와, 그 변수를 사용하여 동적으로 메트릭이 추가되는 패널을 만들어보도록 하겠습니다. 대시보드 추가  먼저 좌측메뉴에서 Create - Dashboard를 선택하여 대시보드를 만듭니다.
+  아래 순서대로 현재 대시보드의 이름을 지정하고 저장합니다.
+  다음으로 데이터를 표현할 패널을 만듭니다. 패널은 메트릭 뿐만 아니라 로그, 테이블 등 다양한 데이터를 표현할 수 있습니다.</description>
+    </item>
+    
     <item>
       <title>Azure 리소스 모니터링 서버 만들기 (2)</title>
       <link>https://chiwoo.bmdevs.com/post/grafana/made_grafana-srv2/</link>
