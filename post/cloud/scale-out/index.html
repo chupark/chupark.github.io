@@ -20,7 +20,7 @@
 1. 버전 관리  Scale Out VM은 빠른 배포를 목적으로 하기 때문에 미리 구성된 가상머신 이미지를 참조하여 수평 확장을 진행한다. 그렇기 때문에 이미 애플리케이션이 모두 탑재된 이미지를 만들어 두거나, OS가 설치되어있고 기본적인 보안 구성이 완료된 이미지로 VM을 만들도록 한 후, 시작 스크립트로 모든 애플리케이션을 작동시키도록 해야한다.">
 <meta itemprop="datePublished" content="2021-04-02T23:31:08+09:00" />
 <meta itemprop="dateModified" content="2021-04-02T23:31:08+09:00" />
-<meta itemprop="wordCount" content="706">
+<meta itemprop="wordCount" content="707">
 
 
 
@@ -156,7 +156,7 @@ if (!doNotTrack) {
 <li>Foundation Image : OS Image + 미들웨어, 런타임, 웹서버 등이 설치됨</li>
 <li>Immutable Image : Foundation Image + 완전히 시동 가능한 애플리케이션이 설치됨</li>
 </ul>
-<p>가상 머신 이미지를 만드는 사용자 손을 많이 타는 복잡한 작업이다. 손을 많이 탄다는 의미는 그만큼 실수할 확률이 높다. 다행스럽게도 이런 과정을 자동화 해주는 오픈소스 소프트웨어가 있는데 바로 Packer다. Packer는 다양한 클라우드 벤더의 이미지를 만들 수 있는 기능을 제공하며 Azure DevOps를 사용할 경우 후속 파이프 라인까지 만들어 이미지를 자동으로 업데이트 해줄 수도 있다. 배포 과정을 잠시 살펴보면 다음와 같다. (Azure 기준)
+<p>가상 머신 이미지를 만드는 작업은 사용자 손을 많이 타는 복잡한 작업이다. 손을 많이 탄다는 의미는 그만큼 실수할 확률이 높아진다는 뜻이다. 다행스럽게도 이런 과정을 자동화 해주는 오픈소스 소프트웨어가 있는데 바로 Packer다. Packer는 다양한 클라우드 벤더의 이미지를 만들 수 있는 기능을 제공하며 Azure에선 DevOps를 사용하여 후속 파이프 라인까지 만들어 이미지를 자동으로 업데이트 해줄 수도 있다. 배포 과정을 잠시 살펴보면 다음와 같다. (Azure 기준)
 <figure>
     <img src="/img/cloud/scale-out/3-scaling.png"/> 
 </figure>
