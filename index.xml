@@ -6,7 +6,17 @@
     <description>Recent content on 나의 블로그</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 04 Jan 2021 22:12:20 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Apr 2021 23:31:08 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>클라우드 VM의 Scale Out</title>
+      <link>https://chiwoo.bmdevs.com/post/cloud/scale-out/</link>
+      <pubDate>Fri, 02 Apr 2021 23:31:08 +0900</pubDate>
+      
+      <guid>https://chiwoo.bmdevs.com/post/cloud/scale-out/</guid>
+      <description>클라우드 환경에서 Scale Out 다양한 클라우드 벤더에선 클라우드의 장점중 하나인 빠른 딜리버리를 사용하여 자동 확장 VM 서비스를 제공하고 있다. 그리고 구성 방법도 매우 심플하여 쉽게 사용할 수 있을 것 같지만 고려해야 할 사항이 몇 가지 존재한다.
+1. 버전 관리  Scale Out VM은 빠른 배포를 목적으로 하기 때문에 미리 구성된 가상머신 이미지를 참조하여 수평 확장을 진행한다. 그렇기 때문에 이미 애플리케이션이 모두 탑재된 이미지를 만들어 두거나, OS가 설치되어있고 기본적인 보안 구성이 완료된 이미지로 VM을 만들도록 한 후, 시작 스크립트로 모든 애플리케이션을 작동시키도록 해야한다.</description>
+    </item>
+    
     <item>
       <title>Azure 리소스 모니터링 서버 만들기 (3)</title>
       <link>https://chiwoo.bmdevs.com/post/grafana/made_grafana-srv3/</link>

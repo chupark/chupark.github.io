@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-	<meta name="generator" content="Hugo 0.76.1" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>나의 블로그</title>
+	<title>Cloud - 나의 블로그</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="Chi Woo Park&#39;s Personal blog about everything">
-		<meta property="og:title" content="나의 블로그" />
+	<meta name="description" content="">
+		<meta property="og:title" content="Cloud" />
 <meta property="og:description" content="Chi Woo Park&#39;s Personal blog about everything" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://chiwoo.bmdevs.com/" />
+<meta property="og:url" content="https://chiwoo.bmdevs.com/categories/cloud/" />
 <meta property="og:updated_time" content="2021-04-02T23:31:08+09:00" />
 
-		<meta itemprop="name" content="나의 블로그">
+		<meta itemprop="name" content="Cloud">
 <meta itemprop="description" content="Chi Woo Park&#39;s Personal blog about everything">
 
 		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="나의 블로그"/>
+<meta name="twitter:title" content="Cloud"/>
 <meta name="twitter:description" content="Chi Woo Park&#39;s Personal blog about everything"/>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +27,7 @@
 
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
-	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="나의 블로그">
+	<link rel="alternate" type="application/rss+xml" href="/categories/cloud/index.xml" title="나의 블로그">
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
@@ -100,77 +99,37 @@ if (!doNotTrack) {
 		<div class="wrapper flex">
 			<div class="primary">
 			
-<head>
-<link rel="chupark" href="https://chiwoo.bmdevs.com/">
-</head>
 <main class="main list" role="main">
+	<header class="main__header">
+		<h1 class="main__title">Cloud</h1>
+	</header>
 	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/post/kubernetes-daemonset/" rel="bookmark">
-			Kubernetes Daemonset
+			<a href="/post/cloud/scale-out/" rel="bookmark">
+			클라우드 VM의 Scale Out
 			</a>
 		</h3>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">chupark</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-03T11:06:22&#43;09:00">2020-09-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes-pod/" rel="category">kubernetes pod</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-04-02T23:31:08&#43;09:00">2021-04-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/cloud/" rel="category">Cloud</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Daemonset, 데몬셋 레플리카셋은 Kubernetes 클러스터의 특정 위치에 배포된 특정 개수의 포드를 실행하는 데 사용된다. 그러나 노드 로그 수집기, 노드 리소스 모니터 수집기 등 각 노드에서 정확히 하나의 포드를 실행해야 하는 경우가 있다. 이 경우 데몬셋을 사용한다.
-기본  데몬셋에 의해 만들어진 포드는 이미 대상 노드가 지정돼 욌고 Kubernetes 스케줄러를 패스한다. 데몬셋은 레플리카의 개념이 없고 노드가 있는 수만큼 포드를 생성하고 노드 각각에 포드를 하나씩 배포한다. 노드가 다운되면 데몬셋은 다운된 노드의 포드를 다른 노드로 스케줄하지 않는다.
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/kubernetes-replicaset/" rel="bookmark">
-			Kubernetes Replicaset
-			</a>
-		</h3>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">chupark</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-02T15:50:46&#43;09:00">2020-09-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes-pod/" rel="category">kubernetes pod</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Replicaset, 레플리카셋 레플리카셋은 포드의 복제본을 일정한 수의 복제본으로 유지하려고 노력하는 Kubernetes 리소스다. 최초에는 레플리케이션 컨트롤러가 포드를 복제하고 노드가 실패했을 때 재스키줄링하는 유일한 Kubernetes 구성 요소였다. 나중에 레플리케이션 컨트롤러보다 더 진보된 레플리카셋이라는 리소스가 도입됐다.
-기본  레플리카셋은 레플리케이션컨트롤러와 똑같이 동작하지만 다양한 포드 셀렉터를 갖는다. 레플리케이션 컨트롤러는 단일 셀렉터만 사용해 포드를 매칭시켰지만, 레플리카셋은 특정 라벨이 있거나 없거나와 여러개의 라벨을 일치시킬 수 있다. 또한 env=*과 같이, 특정 라벨 키를 가진 모든 포드를 매칭시킬 수도 있다.
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/post/kubernetes-pod1/" rel="bookmark">
-			Kubernetes Pod
-			</a>
-		</h3>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">chupark</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-01T15:56:21&#43;09:00">2020-09-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/kubernetes-pod/" rel="category">kubernetes pod</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Pod, 포드 Pod는 Kubernetes 애플리케이션의 배포 단위이다. Pod 안에는 여러 컨테이너를 배치할 수 있으며 같은 Pod는 같은 네임스페이스를 공유하기 때문에 hostname, ip등을 공유하게 된다.
-기본  포드는 컨테이너의 공동의 배치 그룹이며 Kubernetes의 기본 빌딩 블록을 대표한다. Kubernetes는 컨테이너를 개별적으로 배포하는 대신 항상 컨테이너의 포드를 배포하고 운영한다. 포드는 일반적으로 단일 컨테이너를 포함하지만 여러 개의 컨테이너를 포함하여 배포할 수 있다. 같은 포드 내의 컨테이너는 동일한 워커노드에서 실행된다. 포드에는 볼륨이라는 저장소를 마운트하여 포드 내의 컨테이너가 볼륨을 공유하며 사용할 수 있다.
+		클라우드 환경에서 Scale Out 다양한 클라우드 벤더에선 클라우드의 장점중 하나인 빠른 딜리버리를 사용하여 자동 확장 VM 서비스를 제공하고 있다. 그리고 구성 방법도 매우 심플하여 쉽게 사용할 수 있을 것 같지만 고려해야 할 사항이 몇 가지 존재한다.
+1. 버전 관리  Scale Out VM은 빠른 배포를 목적으로 하기 때문에 미리 구성된 가상머신 이미지를 참조하여 수평 확장을 진행한다. 그렇기 때문에 이미 애플리케이션이 모두 탑재된 이미지를 만들어 두거나, OS가 설치되어있고 기본적인 보안 구성이 완료된 이미지로 VM을 만들도록 한 후, 시작 스크립트로 모든 애플리케이션을 작동시키도록 해야한다.
 	</div>
 </article>
+	
 </main>
 
-<div class="pagination">
-	<a class="pagination__item pagination__item--prev btn" href="/">«</a>
-	<span class="pagination__item pagination__item--current">2/2</span>
-</div>
 
 			</div>
-			<aside class="sidebar"><div class="widget-search widget">
+			
+<aside class="sidebar sidebar--left"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
 			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
