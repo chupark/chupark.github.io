@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>AKS on 나의 블로그</title>
+    <title>AKS on IT 에서 살아남기</title>
     <link>https://chiwoo.bmdevs.com/tags/aks/</link>
-    <description>Recent content in AKS on 나의 블로그</description>
+    <description>Recent content in AKS on IT 에서 살아남기</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
     <lastBuildDate>Fri, 04 Sep 2020 16:33:25 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/tags/aks/index.xml" rel="self" type="application/rss+xml" />

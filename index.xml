@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>나의 블로그</title>
+    <title>IT 에서 살아남기</title>
     <link>https://chiwoo.bmdevs.com/</link>
-    <description>Recent content on 나의 블로그</description>
+    <description>Recent content on IT 에서 살아남기</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Fri, 02 Apr 2021 23:31:08 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Apr 2021 13:10:29 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Me</title>
+      <link>https://chiwoo.bmdevs.com/about/about/</link>
+      <pubDate>Sat, 03 Apr 2021 13:10:29 +0900</pubDate>
+      
+      <guid>https://chiwoo.bmdevs.com/about/about/</guid>
+      <description>전역하니 27살&amp;hellip; 해외플랜트 교육을 듣다보니 대학때 배운 전공으로 일 하며 먹고살기 힘들겠더라. 문득 생각난 초딩때부터 적성검사 하면 나오던 내 적성 프로그래머&amp;hellip; IT 기술 배우려 입학한 폴리텍 융합기술 교육원. 그 선택은 내 인생을 뒤집어 놓은 아주 좋은 선택 이었다.
+그리하여 시작된 IT 정글에서 살아남기! 제 소개에 오신 것을 환영합니다!!
+소개  Microsoft 파트너 Zenith&amp;amp;Company 에서 Azure 아키텍트로 활동하고 있으며, 다양한 프로젝트 참여 경력과 고객 기술지원 경험을 보유하고 있습니다. IaC 패러다임에 많은 관심이 있습니다.</description>
+    </item>
+    
     <item>
       <title>클라우드 VM의 Scale Out</title>
       <link>https://chiwoo.bmdevs.com/post/cloud/scale-out/</link>
@@ -57,15 +68,6 @@ Azure AD App 만들기  우선 사용자를 대신하여 백그라운드에서 A
       <guid>https://chiwoo.bmdevs.com/post/kubernetes-aks-aad/</guid>
       <description>AAD와 AKS의 RBAC Kubernetes 클러스터 보안을 위해 Kubernetes 리소스를 컨트롤 할 수 있는 사용자를 제한할 수 있다. 예를 들어 클러스터 관리자를 한 명 선정하고 그 관리자 에게만 포드, 서비스등 리소스를 배포할 수 있는 권한을 부여할 수 있다. AKS를 사용하면 손쉽게 Azure AD의 원하는 사용자, 그룹에게 해당 작업을 수행할 수 있다.
 이를 위해선 클러스터의 RBAC 플러그인을 활성화하고, AKS관리형 Azure AD 기능이 &amp;ldquo;사용&amp;rdquo; 상태로 배포됐어야한다.   　기본    Kubernetes는 사용자 정보를 클러스터 내부에 저장하지 않는다.</description>
-    </item>
-    
-    <item>
-      <title>About Me</title>
-      <link>https://chiwoo.bmdevs.com/about/about/</link>
-      <pubDate>Thu, 03 Sep 2020 13:10:29 +0900</pubDate>
-      
-      <guid>https://chiwoo.bmdevs.com/about/about/</guid>
-      <description>소개 페이지 작성 dzez</description>
     </item>
     
     <item>

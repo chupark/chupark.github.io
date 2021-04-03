@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Grafana on 나의 블로그</title>
+    <title>Grafana on IT 에서 살아남기</title>
     <link>https://chiwoo.bmdevs.com/tags/grafana/</link>
-    <description>Recent content in Grafana on 나의 블로그</description>
+    <description>Recent content in Grafana on IT 에서 살아남기</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
     <lastBuildDate>Mon, 04 Jan 2021 22:12:20 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/tags/grafana/index.xml" rel="self" type="application/rss+xml" />

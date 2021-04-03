@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Abouts on 나의 블로그</title>
+    <title>Abouts on IT 에서 살아남기</title>
     <link>https://chiwoo.bmdevs.com/about/</link>
-    <description>Recent content in Abouts on 나의 블로그</description>
+    <description>Recent content in Abouts on IT 에서 살아남기</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Thu, 03 Sep 2020 13:10:29 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/about/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Apr 2021 13:10:29 +0900</lastBuildDate><atom:link href="https://chiwoo.bmdevs.com/about/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About Me</title>
       <link>https://chiwoo.bmdevs.com/about/about/</link>
-      <pubDate>Thu, 03 Sep 2020 13:10:29 +0900</pubDate>
+      <pubDate>Sat, 03 Apr 2021 13:10:29 +0900</pubDate>
       
       <guid>https://chiwoo.bmdevs.com/about/about/</guid>
-      <description>소개 페이지 작성 dzez</description>
+      <description>전역하니 27살&amp;hellip; 해외플랜트 교육을 듣다보니 대학때 배운 전공으로 일 하며 먹고살기 힘들겠더라. 문득 생각난 초딩때부터 적성검사 하면 나오던 내 적성 프로그래머&amp;hellip; IT 기술 배우려 입학한 폴리텍 융합기술 교육원. 그 선택은 내 인생을 뒤집어 놓은 아주 좋은 선택 이었다.
+그리하여 시작된 IT 정글에서 살아남기! 제 소개에 오신 것을 환영합니다!!
+소개  Microsoft 파트너 Zenith&amp;amp;Company 에서 Azure 아키텍트로 활동하고 있으며, 다양한 프로젝트 참여 경력과 고객 기술지원 경험을 보유하고 있습니다. IaC 패러다임에 많은 관심이 있습니다.</description>
     </item>
     
   </channel>
